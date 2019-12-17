@@ -9,13 +9,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.get("/",(request,response)=>{
+    response.status(200).send("Test Test! if you see this your server is upp and running");
+});
 app.all("*",(req,res)=>{
     res.status(404).send("The asked resource is lost somewhere.. ps. check for typos");
 });
 app.listen(port,()=>{
 console.info(`App is running at your host with port ${port}`);
 });
-app.get("/",(request,response)=>{
-    response.send("Test Test! if you see this your server is upp and running");
-});
+
 /** the Real logic goes here */
