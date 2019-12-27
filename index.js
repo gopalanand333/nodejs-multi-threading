@@ -10,8 +10,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.get("/",(request,response)=>{
+    console.log(request.body);
     response.status(200).send("Test Test! if you see this your server is upp and running");
 });
+
+/** Load supported algorithm libs */
+const heartProcessorAlgorithm = require("./alogrithms/heartRateDataProcessor");
+app.get("/getHeartData", heartProcessorAlgorithm.sampleFunction);
 app.all("*",(req,res)=>{
     res.status(404).send("The asked resource is lost somewhere.. ps. check for typos");
 });
