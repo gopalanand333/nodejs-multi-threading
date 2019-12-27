@@ -16,12 +16,12 @@ app.get("/",(request,response)=>{
 
 /** Load supported algorithm libs */
 const heartProcessorAlgorithm = require("./alogrithms/heartRateDataProcessor");
+const serialAlgo = require("./alogrithms/serialHeartDataProcessor");
 app.get("/getHeartData", heartProcessorAlgorithm.sampleFunction);
+app.get("/getSerialData", serialAlgo.serialProcessor);
 app.all("*",(req,res)=>{
     res.status(404).send("The asked resource is lost somewhere.. ps. check for typos");
 });
 app.listen(port,()=>{
 console.info(`App is running at your host with port ${port}`);
 });
-
-/** the Real logic goes here */

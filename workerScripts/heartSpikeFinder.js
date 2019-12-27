@@ -1,16 +1,14 @@
 /*jshint esversion: 6*/
 const { worker, parentPort, workerData } = require("worker_threads");
-console.log("codeblock goes above not sure what " + workerData);
+console.log("Data recieved form parent method");
 const heartRateArray = workerData;
 
-//spike filtering algorithm
+//spike(the heartrate wich is very high than the desired one) filtering
 const getSpikesFilter = (element) => element.heartRate <= 55 || element.heartRate >= 100 ? element : null;
 
-
+//filters only spike values
 const getSpikes = (heartData) => {
-    const spikesData = heartData.filter(getSpikesFilter);
-
+    return heartData.filter(getSpikesFilter);
 };
-
 //this will post data to the parent algorithm
-parentPort.postMessage({ fileName: workerData, status: "Done" });
+parentPort.postMessage(getSpikes(heartRateArray).length);
